@@ -1,19 +1,25 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { Context } from '../contexts/AuthContext'
 import { InputText } from 'primereact/inputtext'
 import { Button } from 'primereact/button'
 import { IconField } from 'primereact/iconfield'
 import { InputIcon } from 'primereact/inputicon'
 
 const Login = () => {
-    const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false)
-    
-    const { register, handleSubmit } = useForm(event)
-    const logar = (dados) => {
-        console.log('Dados capturados do formulário: ', dados)
-        navigate('dashboard')
+
+    const { register, handleSubmit } = useForm()
+
+    const { setIsAuthenticated } = useContext(Context)
+    const navigate = useNavigate()    
+
+    function login(data) {
+        if(data.email == 'fabriciopstos@outlook.com' && data.password == 'qwe123123') {
+            setIsAuthenticated(true)
+            navigate('home')
+        }
     }
 
     return (
@@ -22,7 +28,7 @@ const Login = () => {
                 <form 
                     style={{ backgroundColor: '#F9FAFB' }} 
                     className='col-12 md:col-3 p-3 border-round-md'
-                    onSubmit={handleSubmit(logar)}
+                    onSubmit={handleSubmit(login)}
                 >
                     <h3 className='text-center text-4xl'>Seja bem-vindo</h3>
                     <label htmlFor="email" className='block uppercase font-bold text-sm mb-1'>Email</label>

@@ -1,15 +1,15 @@
-import { PrimeReactProvider } from 'primereact/api'
-import Paths from './routes/Paths'
-
 import 'primereact/resources/themes/lara-light-blue/theme.css'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
+import Paths from './routes/Paths'
+import { AuthContext } from './contexts/AuthContext'
+import { useState } from 'react'
 
 const App = () => {
   return (
-    <PrimeReactProvider>
+    <AuthContext>
       <Paths />
-    </PrimeReactProvider>
+    </AuthContext>
   );
 }
  
